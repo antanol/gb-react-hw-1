@@ -10,10 +10,6 @@ body {
   height: 99vh;
   margin: auto;
 
-	display: flex;
-	flex-direction: column;
-  justify-content: space-between;
-
   header{
     padding: 10px;
     
@@ -30,16 +26,8 @@ body {
     }
   }
 
-  main{
-
-  }
-
   footer{
     position: fixed;
     bottom: 0;
-
-    input{
-      width: calc(100% - 40px);
-    }
   }
 }

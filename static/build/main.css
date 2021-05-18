@@ -4,10 +4,7 @@ body {
 .chat-window {
   width: 600px;
   height: 99vh;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between; }
+  margin: auto; }
   .chat-window header {
     padding: 10px;
     display: flex;
@@ -20,6 +17,4 @@ body {
   .chat-window footer {
     position: fixed;
     bottom: 0; }
-    .chat-window footer input {
-      width: calc(100% - 40px); }
 

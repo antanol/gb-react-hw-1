@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-function Message(){
+function Message(props){
     return (
-        <div className='message'>
-            kjk
-        </div>
+        props.history.map((message, index) => 
+            <div className='message' key={index}>
+                { message }
+            </div>
+        )
     )
 };
 
