@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import './index.scss';
+import Chat from './Chat';
+
 ReactDOM.render(
-    <h1 className='element'>Кажется, мы подключили React</h1>,
-    document.getElementById('root')
+  <Chat />,
+  document.getElementById('root')
 );

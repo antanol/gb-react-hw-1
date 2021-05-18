@@ -1,0 +1,45 @@
+body {
+  font-family: 'Comic Sans MS', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+
+.chat-window{
+  width: 600px;
+  height: 99vh;
+  margin: auto;
+
+	display: flex;
+	flex-direction: column;
+  justify-content: space-between;
+
+  header{
+    padding: 10px;
+    
+    display: flex;
+    align-items: center;
+
+    background-color: darkslategray;
+    color: white;
+  
+    h1{
+      margin: 0;
+      padding: 10px;
+
+    }
+  }
+
+  main{
+
+  }
+
+  footer{
+    position: fixed;
+    bottom: 0;
+
+    input{
+      width: calc(100% - 40px);
+    }
+  }
+}

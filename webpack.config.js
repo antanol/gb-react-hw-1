@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 /*
     entry — файл, с которого начинается сборка приложения. Их может быть несколько, тогда и сборка будет не одна;
@@ -19,6 +19,11 @@ module.exports = {
        path: path.resolve(__dirname, 'static', 'build'),
        filename: 'app.js'
    },
+   plugins: [
+       new MiniCssExtractPlugin({
+           filename: 'main.css'
+       })
+   ],
 
    module: {
     rules: [
@@ -30,7 +35,20 @@ module.exports = {
             options: {
               presets: ['@babel/preset-env', '@babel/preset-react'],
             }
-        }
+        },
+        {
+            test: /\.scss$/,
+            use: [
+              MiniCssExtractPlugin.loader,
+              {
+                loader: 'css-loader',
+                options: { sourceMap: true }
+              }, {
+                loader: 'sass-loader',
+                options: { sourceMap: true }
+              }
+            ]
+          }
     ]
    }
 };
