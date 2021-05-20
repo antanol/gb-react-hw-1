@@ -30,7 +30,11 @@ function Chat(){
                 <Message history={messages}/>
             </main>
             <footer>
-                <textarea value={inputValue} onChange={onInputChange}/>
+                <textarea 
+                    placeholder='Введите сообщение . . .'
+                    value={inputValue} 
+                    onChange={onInputChange}
+                />
                 <button onClick={onButtonClick}>
                     <i className='fa fa-paper-plane' aria-hidden='true' title='Отправить'></i>
                 </button>

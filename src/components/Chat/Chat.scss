@@ -1,5 +1,7 @@
+@import '_variables.scss';
+
 .chat-window{
-    width: 600px;
+    width: $width-chat;
     height: 99vh;
     margin: auto;
   
@@ -20,7 +22,21 @@
     }
   
     footer{
+      display: flex;
+
       position: fixed;
       bottom: 0;
+
+      textarea{
+        resize: none;
+
+        width: $width-chat - $width-send;
+        height: $height-send - 6px;
+      }
+
+      button{
+        width: $width-send;
+        height: $height-send;
+      }
     }
   }
