@@ -1,5 +1,7 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+// модуль для анализа размера бандлов
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /*
     entry — файл, с которого начинается сборка приложения. Их может быть несколько, тогда и сборка будет не одна;
@@ -14,22 +16,33 @@ module.exports = {
    entry: {
        app: './index.js',
    },
-   context: path.resolve(__dirname, 'static_src'),
+   context: path.resolve(__dirname, 'src'),
    output: {
        path: path.resolve(__dirname, 'static', 'build'),
        filename: 'app.js'
    },
+
+   devServer: {
+       historyApiFallback: true,
+       open: true,
+       compress: true,
+       hot: true,
+       port: 8080,
+   },
+   
    plugins: [
        new MiniCssExtractPlugin({
            filename: 'main.css'
-       })
+       }),
+       
+      // new BundleAnalyzerPlugin()
    ],
 
    module: {
     rules: [
         {
             test: /\.(js|jsx)$/,
-            include: path.resolve(__dirname, "static_src"),
+            include: path.resolve(__dirname, "src"),
             loader: 'babel-loader',
             exclude: /node_modules/,
             options: {

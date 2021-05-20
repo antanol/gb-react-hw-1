@@ -1,0 +1,26 @@
+.chat-window{
+    width: 600px;
+    height: 99vh;
+    margin: auto;
+  
+    header{
+      padding: 10px;
+      
+      display: flex;
+      align-items: center;
+  
+      background-color: darkslategray;
+      color: white;
+    
+      h1{
+        margin: 0;
+        padding: 10px;
+  
+      }
+    }
+  
+    footer{
+      position: fixed;
+      bottom: 0;
+    }
+  }
