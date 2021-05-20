@@ -9,11 +9,9 @@ function Chat(){
 
 
     const onButtonClick = () => {
-        console.log('Check: ', { messages });
-  
         setMessages([...messages, inputValue]);
 
-        inputValue = '';
+        setInputValue('');
     }
 
     const onInputChange = (evt) => {
