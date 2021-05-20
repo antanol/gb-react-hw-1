@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 function Message(props){
     return (
         props.history.map((message, index) => 
-            <div className='message' key={index}>
+            <div 
+              className={props.who=='me'?'message me':'message'} 
+              key={index}
+            >
                 { message }
             </div>
         )
@@ -12,6 +15,7 @@ function Message(props){
 };
 
 Message.propTypes = {
-    history: PropTypes.arrayOf(PropTypes.string).isRequired
+    history: PropTypes.arrayOf(PropTypes.string).isRequired,
+    who: PropTypes.string.isRequired
 }
 export default Message;

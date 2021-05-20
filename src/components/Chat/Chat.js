@@ -27,7 +27,7 @@ function Chat(){
                 <h1>Чат для монологов</h1>
             </header>
             <main>
-                <Message history={messages}/>
+                <Message history={messages} who='me'/>
             </main>
             <footer>
                 <textarea 

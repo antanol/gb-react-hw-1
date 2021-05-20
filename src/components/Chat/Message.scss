@@ -1,0 +1,17 @@
+@import '_variables.scss';
+
+.message {
+    width: $width-chat/2;
+
+    margin: 5px;
+    padding: 10px;
+    
+    border-radius: 10px 10px 5px;
+
+    background-color: white;
+}
+
+.me{
+    align-self: flex-end;
+
+}

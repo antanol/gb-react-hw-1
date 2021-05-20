@@ -1,4 +1,5 @@
 @import '_variables.scss';
+@import 'Message.scss';
 
 .chat-window{
     width: $width-chat;
@@ -20,6 +21,11 @@
   
       }
     }
+
+    main{
+      display: flex;
+      flex-direction: column;
+    }
   
     footer{
       display: flex;
@@ -30,7 +36,7 @@
       textarea{
         resize: none;
 
-        width: $width-chat - $width-send;
+        width: $width-chat - $width-send - 6px;
         height: $height-send - 6px;
       }
 
