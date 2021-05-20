@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function Message(props){
     return (
@@ -10,4 +11,7 @@ function Message(props){
     )
 };
 
+Message.propTypes = {
+    history: PropTypes.arrayOf(PropTypes.string).isRequired
+}
 export default Message;
