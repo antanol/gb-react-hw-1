@@ -1,6 +1,9 @@
 const path = require('path');
+// нужен для HMR
+const webpack = require('webpack');
+// CSS в отдельный файл
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-// модуль для анализа размера бандлов
+// модуль для анализа размера бандлов (выключен чуть ниже)
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 /*
@@ -13,6 +16,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 */
 
 module.exports = {
+  mode: 'development',
    entry: {
        app: './index.js',
    },
@@ -23,14 +27,18 @@ module.exports = {
    },
 
    devServer: {
+      //  contentBase: path.resolve(__dirname, "./public"),
        historyApiFallback: true,
        open: true,
        compress: true,
        hot: true,
        port: 8080,
+      //  stats: 'errors-only'
    },
    
    plugins: [
+       new webpack.HotModuleReplacementPlugin(),
+    
        new MiniCssExtractPlugin({
            filename: 'main.css'
        }),
@@ -46,7 +54,7 @@ module.exports = {
             loader: 'babel-loader',
             exclude: /node_modules/,
             options: {
-              presets: ['@babel/preset-env', '@babel/preset-react'],
+              presets: ['@babel/preset-env', '@babel/preset-react']
             }
         },
         {

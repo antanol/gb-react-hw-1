@@ -1,10 +1,10 @@
 @import '_variables.scss';
-@import 'Message.scss';
 
 .chat-window{
     width: $width-chat;
     height: 99vh;
     margin: auto;
+    background: antiquewhite;
   
     header{
       padding: 10px;

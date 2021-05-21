@@ -8,6 +8,10 @@ function Message(props){
               className={props.who=='me'?'message me':'message'} 
               key={index}
             >
+                <header>
+                    <span className='author'> {props.who=='me'?'Вы':props.who} </span>
+                    <span className='time'> {props.time} </span>
+                </header>
                 { message }
             </div>
         )

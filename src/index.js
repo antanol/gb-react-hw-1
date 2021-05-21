@@ -8,3 +8,9 @@ ReactDOM.render(
   <Chat />,
   document.getElementById('root')
 );
+
+// Проверяется, активирован ли интерфейс горячей замены модулей
+if (module.hot) {
+  // Принимается горячее обновление hot update
+  module.hot.accept();
+}

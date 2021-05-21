@@ -1,3 +1,4 @@
+import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
 import Message from './Message';
@@ -22,10 +23,10 @@ function Chat(){
         <div className='chat-window'>
             <header>
                 <i className='fa fa-arrow-left' aria-hidden='true' title='Вернуться ко всем диалогам'></i>
-                <h1>Чат для монологов</h1>
+                <h1>Чат для монологов</h1> апорпро
             </header>
             <main>
-                <Message history={messages} who='me'/>
+                <Message history={messages} who='me' time='15:39'/>
             </main>
             <footer>
                 <textarea 
@@ -41,4 +42,4 @@ function Chat(){
     )
 };
 
-export default Chat;
+export default hot(Chat);
