@@ -1,16 +1,38 @@
-import { hot } from 'react-hot-loader/root';
 import React from 'react';
 
 import Message from './Message';
 
 function Chat(){
-
     let [messages, setMessages] = React.useState([]);
     let [inputValue, setInputValue] = React.useState('');
+    
+    // аналог componentDidUpdate
+    React.useEffect( () => {
+        console.log("Робот отвечает");
+        if (messages.length % 2 == 0){
+            setMessages([...messages, {
+                text: 'На данный момент Ваш собеседник недоступен', 
+                who: 'С вами говорит автоответчик',
+                time: function(){
+                    let date = new Date();
 
+                    return `${date.getHours()}:${date.getMinutes()}`
+                }()
+            }]);
+        };
+
+    }, [messages]);
 
     const onButtonClick = () => {
-        setMessages([...messages, inputValue]);
+        setMessages([...messages, {
+            text: inputValue, 
+            who: 'me',
+            time: function(){
+                let date = new Date();
+
+                return `${date.getHours()}:${date.getMinutes()}`
+            }()
+        }]);
 
         setInputValue('');
     }
@@ -23,10 +45,10 @@ function Chat(){
         <div className='chat-window'>
             <header>
                 <i className='fa fa-arrow-left' aria-hidden='true' title='Вернуться ко всем диалогам'></i>
-                <h1>Чат для монологов</h1> апорпро
+                <h1>Чат для монологов</h1>
             </header>
             <main>
-                <Message history={messages} who='me' time='15:39'/>
+                <Message history={messages}/>
             </main>
             <footer>
                 <textarea 
@@ -42,4 +64,4 @@ function Chat(){
     )
 };
 
-export default hot(Chat);
+export default Chat;
