@@ -21,7 +21,7 @@ function Message(props){
 };
 
 Message.propTypes = {
-    history: PropTypes.arrayOf(PropTypes.string).isRequired
+    history: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default Message;
