@@ -23,7 +23,7 @@ function Chat(){
 
     }, [messages]);
 
-    const onButtonClick = () => {
+    const handleButtonClick = () => {
         setMessages([...messages, {
             text: inputValue, 
             who: 'me',
@@ -37,7 +37,7 @@ function Chat(){
         setInputValue('');
     }
 
-    const onInputChange = (evt) => {
+    const handleInputChange = (evt) => {
         setInputValue(evt.target.value);
     }
 
@@ -54,9 +54,9 @@ function Chat(){
                 <textarea 
                     placeholder='Введите сообщение . . .'
                     value={inputValue} 
-                    onChange={onInputChange}
+                    onChange={handleInputChange}
                 />
-                <button onClick={onButtonClick}>
+                <button onClick={handleButtonClick}>
                     <i className='fa fa-paper-plane' aria-hidden='true' title='Отправить'></i>
                 </button>
             </footer>
