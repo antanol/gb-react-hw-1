@@ -7,35 +7,29 @@ function Chat(){
     let [inputValue, setInputValue] = React.useState('');
     let [showPlaceholder, setShowPlaceholder] = React.useState(false);
     
+    const addMessage = (who, text) => {
+        return {
+            who: who,
+            text: text, 
+            time: function(){
+                let date = new Date();
+
+                return `${date.getHours()}:${date.getMinutes()}`
+            }()
+        }
+    }
+
     // аналог componentDidUpdate
     React.useEffect( () => {
-        // console.log("Робот отвечает");
-
         if (messages.length % 2 == 0){
-            setMessages([...messages, {
-                text: 'На данный момент Ваш собеседник недоступен', 
-                who: 'С вами говорит автоответчик',
-                time: function(){
-                    let date = new Date();
-
-                    return `${date.getHours()}:${date.getMinutes()}`
-                }()
-            }]);
+            setMessages([...messages, addMessage('С вами говорит автоответчик', 'На данный момент Ваш собеседник недоступен')]);
         };
 
     }, [messages]);
 
     const handleButtonClick = () => {
         if (inputValue) {
-            setMessages([...messages, {
-                text: inputValue, 
-                who: 'me',
-                time: function(){
-                    let date = new Date();
-
-                    return `${date.getHours()}:${date.getMinutes()}`
-                }()
-            }]);
+            setMessages([...messages, addMessage('me', inputValue)]);
 
             setInputValue('');
         }
