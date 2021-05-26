@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 // CSS в отдельный файл
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 // модуль для анализа размера бандлов (выключен чуть ниже)
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
@@ -17,59 +18,71 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 
 module.exports = {
   mode: 'development',
-   entry: {
-       app: './index.js',
-   },
-   context: path.resolve(__dirname, 'src'),
-   output: {
-       path: path.resolve(__dirname, 'static', 'build'),
-       filename: 'app.js'
-   },
-
-   devServer: {
-      //  contentBase: path.resolve(__dirname, "./public"),
-       historyApiFallback: true,
-       open: true,
-       compress: true,
-       hot: true,
-       port: 8080,
-      //  stats: 'errors-only'
-   },
-   
-   plugins: [
-       new webpack.HotModuleReplacementPlugin(),
-    
-       new MiniCssExtractPlugin({
-           filename: 'main.css'
-       }),
-       
-      // new BundleAnalyzerPlugin()
-   ],
-
-   module: {
-    rules: [
-        {
-            test: /\.(js|jsx)$/,
-            include: path.resolve(__dirname, "src"),
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-            options: {
-              presets: ['@babel/preset-env', '@babel/preset-react']
-            }
-        },
-        {
-            test: /\.scss$/,
-            use: [
-              MiniCssExtractPlugin.loader,
-              {
-                loader: 'css-loader',
-                options: { sourceMap: true }
-              }, {
-                loader: 'sass-loader',
-                options: { sourceMap: true }
-              }
-            ]
-          }
+  entry: {
+    app: [
+      './index.js',
+      'webpack-hot-middleware/client'
     ]
-   }
+  },
+  context: path.resolve(__dirname, 'src'),
+  output: {
+    path: path.resolve(__dirname, 'static', 'build'),
+    // filename: 'app.js'
+  },
+
+  devServer: {
+    // contentBase: path.resolve(__dirname, './public'),
+    historyApiFallback: true,
+    open: true,
+    compress: true,
+    hot: true,
+    port: 8080,
+    stats: 'errors-only'
+  },
+   
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'public', 'index.html')
+    }),
+
+    new webpack.HotModuleReplacementPlugin(),
+
+    new MiniCssExtractPlugin({
+        filename: 'main.css'
+    }),
+       
+    // new BundleAnalyzerPlugin()
+  ],
+
+  module: {
+    rules: [
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { sourceMap: true }
+          }, {
+            loader: 'sass-loader',
+            options: { sourceMap: true }
+          }
+        ]
+      },
+      {
+        test: /\.(js|jsx)$/,
+        include: path.resolve(__dirname, 'src'),
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+        options: {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: ['react-hot-loader/babel']
+        }
+      }
+    ]
+  }
 };
