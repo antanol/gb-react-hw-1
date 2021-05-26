@@ -19,10 +19,7 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 module.exports = {
   mode: 'development',
   entry: {
-    app: [
-      './index.js',
-      'webpack-hot-middleware/client'
-    ]
+    app: './index.js'
   },
   context: path.resolve(__dirname, 'src'),
   output: {
