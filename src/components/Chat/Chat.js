@@ -5,6 +5,7 @@ import Message from './Message';
 function Chat(){
     let [messages, setMessages] = React.useState([]);
     let [inputValue, setInputValue] = React.useState('');
+    let [showPlaceholder, setShowPlaceholder] = React.useState(false);
     
     // аналог componentDidUpdate
     React.useEffect( () => {
@@ -50,6 +51,14 @@ function Chat(){
         }
     };
 
+    const handleButtonMouseOver = () => {
+        setShowPlaceholder(true);
+    };
+
+    const handleButtonMouseOut = () => {
+        setShowPlaceholder(false);
+    };
+
     return (
         <div className='chat-window'>
             <header>
@@ -66,9 +75,16 @@ function Chat(){
                     onChange={handleInputChange}
                     onKeyDown={handleInputKeyDown}
                 />
-                <button onClick={handleButtonClick}>
+                <button
+                    onClick={handleButtonClick}
+                    onMouseOver={handleButtonMouseOver}
+                    onMouseOut={handleButtonMouseOut}
+                >
                     <i className='fa fa-paper-plane' aria-hidden='true' title='Отправить'></i>
                 </button>
+                <div className={showPlaceholder?'placeholder placeholder_show':'placeholder'}>
+                    Вы также можете нажимать ctrl+Enter, чтобы отправить сообщение
+                </div>
             </footer>
         </div>
     )

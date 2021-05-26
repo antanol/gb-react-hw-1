@@ -44,5 +44,26 @@
         width: $width-send;
         height: $height-send;
       }
+
+      .placeholder{
+        display: none;
+        opacity: .8;
+
+        width: $width-placeholder;
+        padding: 10px;
+
+        position: absolute;
+        bottom: 10px;
+        right: -$width-placeholder;
+
+        border: 1px solid darkgrey;
+        background-color: lightgoldenrodyellow;
+
+        font-family: Arial, Helvetica, sans-serif;
+
+        &.placeholder_show{
+          display: block;
+        }
+      }
     }
   }
