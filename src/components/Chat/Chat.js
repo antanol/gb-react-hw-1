@@ -8,7 +8,8 @@ function Chat(){
     
     // аналог componentDidUpdate
     React.useEffect( () => {
-        console.log("Робот отвечает");
+        // console.log("Робот отвечает");
+
         if (messages.length % 2 == 0){
             setMessages([...messages, {
                 text: 'На данный момент Ваш собеседник недоступен', 
@@ -41,6 +42,12 @@ function Chat(){
         setInputValue(evt.target.value);
     }
 
+    const handleInputKeyDown = (evt) => {
+        if (evt.code == "Enter" && evt.ctrlKey){
+            handleButtonClick();
+        }
+    };
+
     return (
         <div className='chat-window'>
             <header>
@@ -55,6 +62,7 @@ function Chat(){
                     placeholder='Введите сообщение . . .'
                     value={inputValue} 
                     onChange={handleInputChange}
+                    onKeyDown={handleInputKeyDown}
                 />
                 <button onClick={handleButtonClick}>
                     <i className='fa fa-paper-plane' aria-hidden='true' title='Отправить'></i>
