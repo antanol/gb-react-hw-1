@@ -25,17 +25,19 @@ function Chat(){
     }, [messages]);
 
     const handleButtonClick = () => {
-        setMessages([...messages, {
-            text: inputValue, 
-            who: 'me',
-            time: function(){
-                let date = new Date();
+        if (inputValue) {
+            setMessages([...messages, {
+                text: inputValue, 
+                who: 'me',
+                time: function(){
+                    let date = new Date();
 
-                return `${date.getHours()}:${date.getMinutes()}`
-            }()
-        }]);
+                    return `${date.getHours()}:${date.getMinutes()}`
+                }()
+            }]);
 
-        setInputValue('');
+            setInputValue('');
+        }
     }
 
     const handleInputChange = (evt) => {
