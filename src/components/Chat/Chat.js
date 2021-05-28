@@ -1,65 +1,128 @@
 import React from 'react';
+import { AppBar, Box, CssBaseline, Container, Fab, IconButton, Paper, TextField, Toolbar, Tooltip, Typography} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import SendIcon from '@material-ui/icons/Send';
 
 import Message from './Message';
+import ChatList from './ChatList/ChatList';
 
 function Chat(){
     let [messages, setMessages] = React.useState([]);
     let [inputValue, setInputValue] = React.useState('');
+    let [showPlaceholder, setShowPlaceholder] = React.useState(false);
     
+    const addMessage = (who, text) => {
+        return {
+            who: who,
+            text: text, 
+            time: function(){
+                let date = new Date();
+                let minutes = date.getMinutes();
+                if (minutes<10){
+                    minutes = '0' + minutes;
+                }
+                
+                return `${date.getHours()}:${minutes}`
+            }()
+        }
+    }
+
     // аналог componentDidUpdate
     React.useEffect( () => {
-        console.log("Робот отвечает");
         if (messages.length % 2 == 0){
-            setMessages([...messages, {
-                text: 'На данный момент Ваш собеседник недоступен', 
-                who: 'С вами говорит автоответчик',
-                time: function(){
-                    let date = new Date();
-
-                    return `${date.getHours()}:${date.getMinutes()}`
-                }()
-            }]);
+            setMessages([...messages, addMessage('С вами говорит автоответчик', 'На данный момент Ваш собеседник недоступен')]);
         };
 
     }, [messages]);
 
-    const onButtonClick = () => {
-        setMessages([...messages, {
-            text: inputValue, 
-            who: 'me',
-            time: function(){
-                let date = new Date();
+    const handleButtonClick = () => {
+        if (inputValue) {
+            setMessages([...messages, addMessage('me', inputValue)]);
 
-                return `${date.getHours()}:${date.getMinutes()}`
-            }()
-        }]);
-
-        setInputValue('');
+            setInputValue('');
+        }
     }
 
-    const onInputChange = (evt) => {
+    const handleInputChange = (evt) => {
         setInputValue(evt.target.value);
     }
 
+    const handleInputKeyDown = (evt) => {
+        if (evt.code == 'Enter' && evt.ctrlKey){
+            handleButtonClick();
+        }
+    };
+
+    const handleButtonMouseOver = () => {
+        setShowPlaceholder(true);
+    };
+
+    const handleButtonMouseOut = () => {
+        setShowPlaceholder(false);
+    };
+
     return (
         <div className='chat-window'>
-            <header>
-                <i className='fa fa-arrow-left' aria-hidden='true' title='Вернуться ко всем диалогам'></i>
-                <h1>Чат для монологов</h1>
-            </header>
-            <main>
-                <Message history={messages}/>
-            </main>
-            <footer>
-                <textarea 
-                    placeholder='Введите сообщение . . .'
-                    value={inputValue} 
-                    onChange={onInputChange}
-                />
-                <button onClick={onButtonClick}>
-                    <i className='fa fa-paper-plane' aria-hidden='true' title='Отправить'></i>
-                </button>
-            </footer>
+            <CssBaseline />
+            <Container maxWidth='md' style = {{ height: '100vh', display: 'flex', flexDirection: 'column'}}>
+                <AppBar position='static'>
+                    <Toolbar>
+                        <Tooltip title='Вернуться ко всем диалогам' aria-label='back'>
+                            <IconButton edge='start' color='inherit'>
+                                <ArrowBackIcon  />
+                            </IconButton>
+                        </Tooltip>
+                        <Typography variant='h4'>
+                            Чат для монологов
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                
+                <Container style={{ 
+                                    padding: '0',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    flexGrow: 1, 
+                                    overflow: 'auto'
+                    }}>
+
+                    <ChatList/>
+
+                    <Paper style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    backgroundColor: '#cfe8fc', 
+                                    flexGrow: 1
+                    }}>
+                        <Message history={messages}/>
+                    </Paper>
+                </Container>
+
+                <footer style={ {  display: 'flex' } }>
+                    <TextField
+                        name='input'
+                        fullWidth={ true }
+                        label='Введите сообщение . . .'
+                        style={ { fontSize: '22px' } }
+                        value={ inputValue }
+                        onChange={handleInputChange}
+                        onKeyDown={handleInputKeyDown}
+                    />
+                    <Tooltip title='Отправить' aria-label='send'>
+                        <Fab
+                            onClick={handleButtonClick}
+                            onMouseOver={handleButtonMouseOver}
+                            onMouseOut={handleButtonMouseOut}
+                        >
+                            <SendIcon />
+                        </Fab>
+                    </Tooltip>
+                    <div className={showPlaceholder?'placeholder placeholder_show':'placeholder'}>
+                        Вы также можете нажимать ctrl+Enter, чтобы отправить сообщение
+                    </div>
+                </footer>
+            </Container>
         </div>
     )
 };
