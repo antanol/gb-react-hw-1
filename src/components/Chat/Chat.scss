@@ -1,69 +1,32 @@
 @import '_variables.scss';
 
-.chat-window{
-    width: $width-chat;
-    height: 99vh;
-    margin: auto;
-    background: antiquewhite;
-  
-    header{
-      padding: 10px;
-      
-      display: flex;
-      align-items: center;
-  
-      background-color: darkslategray;
-      color: white;
-    
-      h1{
-        margin: 0;
-        padding: 10px;
-  
-      }
-    }
+main{
+  display: flex;
+  flex-direction: column;
+}
 
-    main{
-      display: flex;
-      flex-direction: column;
-    }
-  
-    footer{
-      display: flex;
+footer{
+  position: relative;
+  bottom: 0;
 
-      position: fixed;
-      bottom: 0;
+  .placeholder{
+    display: none;
+    opacity: .8;
 
-      textarea{
-        resize: none;
+    width: $width-placeholder;
+    padding: 10px;
 
-        width: $width-chat - $width-send - 6px;
-        height: $height-send - 6px;
-      }
+    position: absolute;
+    bottom: $height-send;
+    right: -$width-placeholder;
 
-      button{
-        width: $width-send;
-        height: $height-send;
-      }
+    border: 1px solid darkgrey;
+    background-color: lightgoldenrodyellow;
 
-      .placeholder{
-        display: none;
-        opacity: .8;
+    font-family: Arial, Helvetica, sans-serif;
 
-        width: $width-placeholder;
-        padding: 10px;
-
-        position: absolute;
-        bottom: $height-send;
-        right: -$width-placeholder;
-
-        border: 1px solid darkgrey;
-        background-color: lightgoldenrodyellow;
-
-        font-family: Arial, Helvetica, sans-serif;
-
-        &.placeholder_show{
-          display: block;
-        }
-      }
+    &.placeholder_show{
+      display: block;
     }
   }
+}

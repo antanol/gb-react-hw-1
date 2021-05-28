@@ -1,4 +1,7 @@
 import React from 'react';
+import { AppBar, Box, CssBaseline, Container, Fab, IconButton, Paper, TextField, Toolbar, Tooltip, Typography} from '@material-ui/core';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import SendIcon from '@material-ui/icons/Send';
 
 import Message from './Message';
 
@@ -44,7 +47,7 @@ function Chat(){
     }
 
     const handleInputKeyDown = (evt) => {
-        if (evt.code == "Enter" && evt.ctrlKey){
+        if (evt.code == 'Enter' && evt.ctrlKey){
             handleButtonClick();
         }
     };
@@ -59,31 +62,55 @@ function Chat(){
 
     return (
         <div className='chat-window'>
-            <header>
-                <i className='fa fa-arrow-left' aria-hidden='true' title='Вернуться ко всем диалогам'></i>
-                <h1>Чат для монологов</h1>
-            </header>
-            <main>
-                <Message history={messages}/>
-            </main>
-            <footer>
-                <textarea 
-                    placeholder='Введите сообщение . . .'
-                    value={inputValue} 
-                    onChange={handleInputChange}
-                    onKeyDown={handleInputKeyDown}
-                />
-                <button
-                    onClick={handleButtonClick}
-                    onMouseOver={handleButtonMouseOver}
-                    onMouseOut={handleButtonMouseOut}
-                >
-                    <i className='fa fa-paper-plane' aria-hidden='true' title='Отправить'></i>
-                </button>
-                <div className={showPlaceholder?'placeholder placeholder_show':'placeholder'}>
-                    Вы также можете нажимать ctrl+Enter, чтобы отправить сообщение
-                </div>
-            </footer>
+            <CssBaseline />
+            <Container maxWidth='sm' style = {{ height: '100vh', display: 'flex', flexDirection: 'column'}}>
+                <AppBar position='static'>
+                    <Toolbar>
+                        <Tooltip title='Вернуться ко всем диалогам' aria-label='back'>
+                            <IconButton edge='start' color='inherit'>
+                                <ArrowBackIcon  />
+                            </IconButton>
+                        </Tooltip>
+                        <Typography variant='h4'>
+                            Чат для монологов
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+                
+                <Paper style={{ 
+                                display: 'flex',
+                                flexDirection: 'column',
+                                backgroundColor: '#cfe8fc', 
+                                flexGrow: 1, 
+                                overflow: 'auto'
+                }}>
+                    <Message history={messages}/>
+                </Paper>
+
+                <footer style={ {  display: 'flex' } }>
+                    <TextField
+                        name='input'
+                        fullWidth={ true }
+                        label='Введите сообщение . . .'
+                        style={ { fontSize: '22px' } }
+                        value={ inputValue }
+                        onChange={handleInputChange}
+                        onKeyDown={handleInputKeyDown}
+                    />
+                    <Tooltip title='Отправить' aria-label='send'>
+                        <Fab
+                            onClick={handleButtonClick}
+                            onMouseOver={handleButtonMouseOver}
+                            onMouseOut={handleButtonMouseOut}
+                        >
+                            <SendIcon />
+                        </Fab>
+                    </Tooltip>
+                    <div className={showPlaceholder?'placeholder placeholder_show':'placeholder'}>
+                        Вы также можете нажимать ctrl+Enter, чтобы отправить сообщение
+                    </div>
+                </footer>
+            </Container>
         </div>
     )
 };
