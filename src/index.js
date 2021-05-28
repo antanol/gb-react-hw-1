@@ -1,11 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom';
 
 import './index.scss';
-import Chat from './components/Chat/Chat';
+import Chat from './components/Layout/Layout';
 
 ReactDOM.render(
-  <Chat />,
+  <BrowserRouter>
+    <Chat />
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
