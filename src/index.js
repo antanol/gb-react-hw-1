@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 
 import './index.scss';
-import Chat from './components/Layout/Layout';
+import Layout from './components/Layout/Layout';
 
 ReactDOM.render(
   <BrowserRouter>
-    <Chat />
+    <Layout />
   </BrowserRouter>,
   document.getElementById('root')
 );
