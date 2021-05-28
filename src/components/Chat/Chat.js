@@ -4,6 +4,7 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import SendIcon from '@material-ui/icons/Send';
 
 import Message from './Message';
+import ChatList from './ChatList/ChatList';
 
 function Chat(){
     let [messages, setMessages] = React.useState([]);
@@ -63,7 +64,7 @@ function Chat(){
     return (
         <div className='chat-window'>
             <CssBaseline />
-            <Container maxWidth='sm' style = {{ height: '100vh', display: 'flex', flexDirection: 'column'}}>
+            <Container maxWidth='md' style = {{ height: '100vh', display: 'flex', flexDirection: 'column'}}>
                 <AppBar position='static'>
                     <Toolbar>
                         <Tooltip title='Вернуться ко всем диалогам' aria-label='back'>
@@ -77,15 +78,26 @@ function Chat(){
                     </Toolbar>
                 </AppBar>
                 
-                <Paper style={{ 
-                                display: 'flex',
-                                flexDirection: 'column',
-                                backgroundColor: '#cfe8fc', 
-                                flexGrow: 1, 
-                                overflow: 'auto'
-                }}>
-                    <Message history={messages}/>
-                </Paper>
+                <Container style={{ 
+                                    padding: '0',
+                                    display: 'flex',
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    flexGrow: 1, 
+                                    overflow: 'auto'
+                    }}>
+
+                    <ChatList/>
+
+                    <Paper style={{
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                    backgroundColor: '#cfe8fc', 
+                                    flexGrow: 1
+                    }}>
+                        <Message history={messages}/>
+                    </Paper>
+                </Container>
 
                 <footer style={ {  display: 'flex' } }>
                     <TextField
