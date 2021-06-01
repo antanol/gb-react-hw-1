@@ -5,7 +5,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Chat from './Chat/Chat';
 import ChatList from './ChatList/ChatList';
 
-function Layout(){
+function Layout(props){
+    const { chatId } = props;
+
+    let chats = [
+        {title: 'Чат для монологов', messageList: [1]},
+        {title: 'Волков', messageList: [2]},
+        {title: 'Громов', messageList: []}
+    ];
+
+
     return (
         <Container maxWidth='md' className='layout' style={{
                 display: 'flex',
@@ -20,13 +29,13 @@ function Layout(){
                         </IconButton>
                     </Tooltip>
                     <Typography variant='h4'>
-                        Чат для монологов
+                        { chatId>1 ? chats[chatId-1].title : chats[0].title}
                     </Typography>
                 </Toolbar>
             </AppBar>
             
             <Container className='main'>
-                <ChatList/>
+                <ChatList chats={chats} />
                 <Chat/>
             </Container>
         </Container>

@@ -1,21 +1,30 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Card, CardHeader } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
-function Contact(){
+function Contact(props){
+    const { chats } = props;
+
+    console.log(chats);
+
     return (
-        <Card>
-            <CardHeader
-                avatar={         
-                    <Skeleton variant="circle" width={40} height={40} />
-                }
-                
-                title={
-                    <Skeleton height={10} width="80%" style={{ marginBottom: 6 }} />
-                }
-                subheader={<Skeleton height={10} width="40%" />}
-            />
-        </Card>
+        chats.map((chat, index)=>
+            <Link to = {`/chat/${index+1}`}>
+                <Card>
+                    <CardHeader
+                        avatar={         
+                            <Skeleton variant="circle" width={40} height={40} />
+                        }
+                        
+                        title={
+                            chat.title
+                        }
+                        subheader={<Skeleton height={10} width="40%" />}
+                    />
+                </Card>
+            </Link>
+        )
     );
 };
 
