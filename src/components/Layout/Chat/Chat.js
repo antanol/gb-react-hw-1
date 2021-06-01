@@ -4,11 +4,13 @@ import SendIcon from '@material-ui/icons/Send';
 
 import Message from '../Message/Message';
 
-function Chat(){
-    let [messages, setMessages] = React.useState([]);
+function Chat(props){
+    let { chat, chatHistory } = props;
+    
+    let [messages, setMessages] = React.useState(chatHistory);
     let [inputValue, setInputValue] = React.useState('');
     let [showPlaceholder, setShowPlaceholder] = React.useState(false);
-    
+
     const addMessage = (who, text) => {
         return {
             who: who,

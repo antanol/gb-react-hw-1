@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { AppBar, CssBaseline, Container, IconButton, Toolbar, Tooltip, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -6,12 +7,26 @@ import Chat from './Chat/Chat';
 import ChatList from './ChatList/ChatList';
 
 function Layout(props){
-    const { chatId } = props;
+    let { chatId } = props;
+    if (!chatId){
+        chatId = 0;
+    }
 
     let chats = [
-        {title: 'Чат для монологов', messageList: [1]},
-        {title: 'Волков', messageList: [2]},
-        {title: 'Громов', messageList: []}
+        {title: 'Чат для монологов',  
+        messages:[{
+            who: 'me',
+            text: 'Захватить мир',
+            time: '6:16'
+        }]},
+        {
+            title: 'Волков', 
+            messages:[{
+                who: 'me',
+                text: 'покорми Птицу',
+                time: '23:15'
+            }]},
+        {title: 'Громов', messages:[]}
     ];
 
 
@@ -28,15 +43,20 @@ function Layout(props){
                             <ArrowBackIcon  />
                         </IconButton>
                     </Tooltip>
-                    <Typography variant='h4'>
-                        { chatId>1 ? chats[chatId-1].title : chats[0].title}
-                    </Typography>
+                    <Link to = {`/profile/${chatId}`} >
+                        <Typography variant='h4'>
+                            { chats[chatId].title }
+                        </Typography>
+                    </Link>
                 </Toolbar>
             </AppBar>
             
             <Container className='main'>
                 <ChatList chats={chats} />
-                <Chat/>
+                <Chat 
+                    chat={chatId} 
+                    chatHistory= { chats[chatId].messages }
+                />
             </Container>
         </Container>
     )

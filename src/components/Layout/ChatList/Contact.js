@@ -6,11 +6,9 @@ import Skeleton from '@material-ui/lab/Skeleton';
 function Contact(props){
     const { chats } = props;
 
-    console.log(chats);
-
     return (
         chats.map((chat, index)=>
-            <Link to = {`/chat/${index+1}`}>
+            <Link to = {`/chat/${index}`} key={index} >
                 <Card>
                     <CardHeader
                         avatar={         
