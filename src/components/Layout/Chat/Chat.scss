@@ -1,14 +1,16 @@
-@import '_variables.scss';
-@import 'ChatList/ChatList.scss';
+@import '../_variables.scss';
 
-main{
+.chat-window{
+  width: 100%;
+
+  overflow: auto;
+  
   display: flex;
   flex-direction: column;
 }
 
 footer{
   position: relative;
-  bottom: 0;
 
   .placeholder{
     display: none;

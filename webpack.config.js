@@ -34,7 +34,10 @@ module.exports = {
     compress: true,
     hot: true,
     port: 8080,
-    // stats: 'errors-only'
+    stats: 'errors-only',
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
    
   plugins: [
