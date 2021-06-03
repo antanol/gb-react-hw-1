@@ -2,7 +2,6 @@ import React from 'react';
 import { Fab, Paper, TextField, Tooltip } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
-import './Chat.scss';
 import Message from './Message/Message';
 
 function Chat(props){

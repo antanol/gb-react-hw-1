@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom';
 import {CssBaseline} from '@material-ui/core';
 
+import './index.scss';
 import Router from './components/Layout/Router';
 
 ReactDOM.render(

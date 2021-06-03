@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import { AppBar, Container, IconButton, Toolbar, Tooltip, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import './Layout.scss';
-
 import Chat from '../Chat/Chat';
 import ChatList from '../ChatList/ChatList';
 
@@ -45,7 +43,7 @@ function Layout(props){
                             <ArrowBackIcon  />
                         </IconButton>
                     </Tooltip>
-                    <Link to = {`/profile/${chatId}`} title='Перейти на страницу пользователя'>
+                    <Link to = {`/profile/${chatId}`} >
                         <Typography variant='h6'>
                             { chats[chatId].title }
                         </Typography>

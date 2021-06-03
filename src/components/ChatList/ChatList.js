@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './ChatList.scss';
-
 import Contact from './Contact'
 
 function ChatList(props){
