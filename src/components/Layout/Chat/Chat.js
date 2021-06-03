@@ -11,7 +11,7 @@ function Chat(props){
     let [inputValue, setInputValue] = React.useState('');
     let [showPlaceholder, setShowPlaceholder] = React.useState(false);
 
-    const addMessage = (who, text) => {
+    const addMessage = ({who, text}) => {
         return {
             who: who,
             text: text, 
@@ -30,14 +30,14 @@ function Chat(props){
     // аналог componentDidUpdate
     React.useEffect( () => {
         if (messages.length % 2 == 0){
-            setMessages([...messages, addMessage('С вами говорит автоответчик', 'На данный момент Ваш собеседник недоступен')]);
+            setMessages([...messages, addMessage({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})]);
         };
 
     }, [messages]);
 
     const handleButtonClick = () => {
         if (inputValue) {
-            setMessages([...messages, addMessage('me', inputValue)]);
+            setMessages([...messages, addMessage({who: 'me', text:inputValue})]);
 
             setInputValue('');
         }
