@@ -1,9 +1,24 @@
-.main{
-    padding: 20px;
+.main{    
+    flex-grow: 1; 
     
     display: flex;
     flex-direction: row;
-    flex-grow: 1; 
 
-    overflow: auto
+    overflow: auto;
+
+    .left-column{
+        width: 300px;
+        
+        margin: 20px;
+    }
+
+    .info{
+        flex-grow: 1;
+        margin: 20px 0 20px 20px;
+        padding: 5px;
+
+        border: 1px solid darken($color: white, $amount: 30%)
+
+
+    }
 }

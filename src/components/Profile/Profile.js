@@ -28,11 +28,13 @@ function Profile(props){
             
             <Container className='main'>
                 <div className='left-column'>
-                    <img src="http://placehold.it/200" />
+                    <img src="http://placehold.it/250" />
                 </div>
-                <Typography variant='h6'>
-                    Здесь будет имя пользователя с id = { userId }
-                </Typography>
+                <div className='info'>
+                    <Typography variant='h6'>
+                        Допустим, Громов (id = { userId })
+                    </Typography>
+                </div>
             </Container>
         </Container>
     )
