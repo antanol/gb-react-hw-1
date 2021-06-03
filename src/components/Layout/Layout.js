@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, CssBaseline, Container, IconButton, Toolbar, Tooltip, Typography} from '@material-ui/core';
+import { AppBar, Container, IconButton, Toolbar, Tooltip, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+
+import './Layout.scss';
 
 import Chat from '../Chat/Chat';
 import ChatList from '../ChatList/ChatList';
@@ -43,8 +45,8 @@ function Layout(props){
                             <ArrowBackIcon  />
                         </IconButton>
                     </Tooltip>
-                    <Link to = {`/profile/${chatId}`} >
-                        <Typography variant='h4'>
+                    <Link to = {`/profile/${chatId}`} title='Перейти на страницу пользователя'>
+                        <Typography variant='h6'>
                             { chats[chatId].title }
                         </Typography>
                     </Link>

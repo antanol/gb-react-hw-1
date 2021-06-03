@@ -1,12 +1,11 @@
 @import '../_variables.scss';
 
 .chat-window{
-  width: 100%;
-
   overflow: auto;
   
   display: flex;
   flex-direction: column;
+  flex-grow: 1;
 }
 
 footer{

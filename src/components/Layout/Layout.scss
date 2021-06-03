@@ -1,6 +1,18 @@
 .layout{
     height: 100vh;
     
+    header{
+        a{
+            color: white;
+            text-decoration: none;
+            
+            &:hover{
+                color: darken($color: white, $amount: 30%);
+                text-decoration: underline;
+            }
+        }
+    }
+
     .main{
         padding: 0;
 
