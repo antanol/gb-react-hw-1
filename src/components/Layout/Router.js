@@ -2,7 +2,7 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Layout from './Layout';
-import Profile from './Profile/Profile';
+import Profile from '../Profile/Profile';
 
 function Router(){
     return (

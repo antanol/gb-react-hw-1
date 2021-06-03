@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { AppBar, CssBaseline, Container, IconButton, Toolbar, Tooltip, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import Chat from './Chat/Chat';
-import ChatList from './ChatList/ChatList';
+import Chat from '../Chat/Chat';
+import ChatList from '../ChatList/ChatList';
 
 function Layout(props){
     let { chatId } = props;
