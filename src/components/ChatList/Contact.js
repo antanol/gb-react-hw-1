@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Card, CardHeader } from '@material-ui/core';
+import { Card, CardHeader, Typography } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 function Contact(props){
@@ -22,8 +22,17 @@ function Contact(props){
                         title={
                             users[chats[chatId].userId].name
                         }
-                        subheader={<Skeleton height={10} width="40%" />}
+
+                        subheader={
+                            (chats[chatId].messages.length > 0) ? chats[chatId].messages[chats[chatId].messages.length-1].time : ""
+                        }
                     />
+                    
+                    <Typography variant="body2" color="textSecondary">
+                        {
+                            (chats[chatId].messages.length > 0) ? chats[chatId].messages[chats[chatId].messages.length-1].text : ""
+                        }
+                    </Typography>
                 </Card>
             </Link>
         )
