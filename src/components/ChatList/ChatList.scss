@@ -3,4 +3,12 @@
     background-color: white;
 
     overflow: auto;
+
+    a{
+        text-decoration: none;
+    }
+
+    .MuiCard-root:hover{
+        background-color: darken($color: white, $amount: 10%);
+    }
 }

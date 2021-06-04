@@ -1,15 +1,26 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { Card, CardHeader, Typography } from '@material-ui/core';
+import { Card, CardHeader, CardContent, Typography } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
+
+const useStyles = makeStyles({
+    messageHeader: {
+        padding: '10px 10px 0',
+    },
+    message: {
+        padding: '0',
+        paddingLeft: '60px'
+    }
+});
 
 function Contact(props){
     const { chats } = props;
     const users = useSelector( globalState => globalState.profile.users );
+    
+    const classes = useStyles();
 
-    console.log(chats);
-    console.log(users)
     return (
         Object.keys(chats).map((chatId, index)=>
             <Link to = {`/chat/${chatId}`} key={index} >
@@ -26,13 +37,18 @@ function Contact(props){
                         subheader={
                             (chats[chatId].messages.length > 0) ? chats[chatId].messages[chats[chatId].messages.length-1].time : ""
                         }
+
+                        className = {classes.messageHeader}
                     />
-                    
-                    <Typography variant="body2" color="textSecondary">
-                        {
-                            (chats[chatId].messages.length > 0) ? chats[chatId].messages[chats[chatId].messages.length-1].text : ""
-                        }
-                    </Typography>
+                    <CardContent
+                        className = {classes.message}
+                    >
+                        <Typography variant="body2" color="textSecondary">
+                            {
+                                (chats[chatId].messages.length > 0) ? chats[chatId].messages[chats[chatId].messages.length-1].text : ""
+                            }
+                        </Typography>
+                    </CardContent>
                 </Card>
             </Link>
         )
