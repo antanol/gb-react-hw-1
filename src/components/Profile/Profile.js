@@ -32,7 +32,7 @@ function Profile(props){
                     <Typography variant='h6'>
                         Допустим, Громов (id = { userId })
                     </Typography>
-                    <Typography variant='body'>
+                    <Typography variant='body1'>
                         Дата рождения: 9.9.9999
                         <br />
                         Город: Зеленоградск
