@@ -4,12 +4,9 @@ import { AppBar, Container, Toolbar, Typography} from '@material-ui/core';
 import { useSelector } from 'react-redux';
 
 function Profile(props){
-    const profile = useSelector(globalState => globalState.profile);
-
     let { userId } = props;
-    if (!userId){
-        userId = 0;
-    }
+
+    const profile = useSelector(globalState => globalState.profile.users[userId]);
 
     return (
         <Container maxWidth='md' className='layout' style={{

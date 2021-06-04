@@ -28,7 +28,7 @@ function Layout(props){
                             <ArrowBackIcon  />
                         </IconButton>
                     </Tooltip>
-                    <Link to = {`/profile/${chatId}`} >
+                    <Link to = {`/profile/${chats.userId}`} >
                         <Typography variant='h6'>
                             { thisUser.name }
                         </Typography>
