@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { AppBar, Container, IconButton, Toolbar, Tooltip, Typography} from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
@@ -8,27 +9,11 @@ import ChatList from '../ChatList/ChatList';
 
 function Layout(props){
     let { chatId } = props;
-    if (!chatId){
-        chatId = 0;
-    }
 
-    let chats = [
-        {title: 'Чат для монологов',  
-        messages:[{
-            who: 'me',
-            text: 'Захватить мир',
-            time: '6:16'
-        }]},
-        {
-            title: 'Волков', 
-            messages:[{
-                who: 'me',
-                text: 'покорми Птицу',
-                time: '23:15'
-            }]},
-        {title: 'Громов', messages:[]}
-    ];
+    const chats = useSelector( globalState => globalState.chats.talks[chatId] );
+    const users = useSelector( globalState => globalState.profile.users );
 
+    let thisUser = users[chats.userId];
 
     return (
         <Container maxWidth='md' className='layout' style={{
@@ -45,17 +30,16 @@ function Layout(props){
                     </Tooltip>
                     <Link to = {`/profile/${chatId}`} >
                         <Typography variant='h6'>
-                            { chats[chatId].title }
+                            { thisUser.name }
                         </Typography>
                     </Link>
                 </Toolbar>
             </AppBar>
             
             <Container className='main'>
-                <ChatList chats={chats} />
+                <ChatList />
                 <Chat 
-                    chat={chatId} 
-                    chatHistory= { chats[chatId].messages }
+                    chatId={chatId}
                 />
             </Container>
         </Container>

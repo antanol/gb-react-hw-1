@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Container, Toolbar, Typography} from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 function Profile(props){
+    const profile = useSelector(globalState => globalState.profile);
+
     let { userId } = props;
     if (!userId){
         userId = 0;
@@ -30,12 +33,12 @@ function Profile(props){
                 </div>
                 <div className='info'>
                     <Typography variant='h6'>
-                        Допустим, Громов (id = { userId })
+                        { profile.name }
                     </Typography>
                     <Typography variant='body1'>
-                        Дата рождения: 9.9.9999
+                        Дата рождения: { profile.bday }
                         <br />
-                        Город: Зеленоградск
+                        Город: { profile.city }
                     </Typography>
                 </div>
             </Container>

@@ -1,14 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { Card, CardHeader } from '@material-ui/core';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 function Contact(props){
     const { chats } = props;
+    const users = useSelector( globalState => globalState.profile.users );
 
+    console.log(chats);
+    console.log(users)
     return (
-        chats.map((chat, index)=>
-            <Link to = {`/chat/${index}`} key={index} >
+        Object.keys(chats).map((chatId, index)=>
+            <Link to = {`/chat/${chatId}`} key={index} >
                 <Card>
                     <CardHeader
                         avatar={         
@@ -16,7 +20,7 @@ function Contact(props){
                         }
                         
                         title={
-                            chat.title
+                            users[chats[chatId].userId].name
                         }
                         subheader={<Skeleton height={10} width="40%" />}
                     />
