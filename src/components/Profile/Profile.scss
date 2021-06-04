@@ -14,11 +14,9 @@
 
     .info{
         flex-grow: 1;
-        margin: 20px 0 20px 20px;
+        margin: 20px 20px 20px 0;
         padding: 5px;
 
-        border: 1px solid darken($color: white, $amount: 30%)
-
-
+        border: 1px solid darken($color: white, $amount: 30%);
     }
 }
