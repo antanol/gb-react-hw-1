@@ -1,7 +1,8 @@
 @import '../_variables.scss';
 
 .chat-window{
-  width: 100%;
+  // задаём расширяться на всё свободное пространство
+  flex-grow: 1;
 
   overflow: auto;
   

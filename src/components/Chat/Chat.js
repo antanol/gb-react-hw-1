@@ -1,17 +1,21 @@
 import React from 'react';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import { Fab, Paper, TextField, Tooltip } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
-import Message from '../Message/Message';
+import Message from './Message/Message';
+import { addMessage } from '../../actions/chat';
 
 function Chat(props){
-    let { chat, chatHistory } = props;
-    
-    let [messages, setMessages] = React.useState(chatHistory);
+    let { chatId } = props;
+
+    const chats = useSelector( globalState => globalState.chats.talks[chatId] );
+    const dispatch = useDispatch();
+
     let [inputValue, setInputValue] = React.useState('');
     let [showPlaceholder, setShowPlaceholder] = React.useState(false);
 
-    const addMessage = (who, text) => {
+    let createMessageElem = ({who, text}) => {
         return {
             who: who,
             text: text, 
@@ -26,18 +30,19 @@ function Chat(props){
             }()
         }
     }
-
+    
+    
     // аналог componentDidUpdate
     React.useEffect( () => {
-        if (messages.length % 2 == 0){
-            setMessages([...messages, addMessage('С вами говорит автоответчик', 'На данный момент Ваш собеседник недоступен')]);
+        if (chats.length % 2 == 0){
+            dispatch(addMessage({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
         };
 
-    }, [messages]);
+    }, [chats]);
 
     const handleButtonClick = () => {
         if (inputValue) {
-            setMessages([...messages, addMessage('me', inputValue)]);
+            dispatch(addMessage({chatId: chatId, newMessage: createMessageElem({who: 'Я', text:inputValue})}));
 
             setInputValue('');
         }
@@ -69,7 +74,7 @@ function Chat(props){
                             backgroundColor: '#cfe8fc', 
                             flexGrow: 1
             }}>
-                <Message history={messages}/>
+                <Message history={chats.messages}/>
             </Paper>
             
             <footer style={ {  display: 'flex' } }>

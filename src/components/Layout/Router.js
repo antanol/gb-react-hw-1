@@ -2,13 +2,18 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import Layout from './Layout';
-import Profile from './Profile/Profile';
+import Profile from '../Profile/Profile';
 
 function Router(){
     return (
         <Switch>
-            <Route exact path='/' component={ Layout } />
-            
+            <Route exact 
+                    path='/' 
+                    render={ obj => <Layout
+                            chatId={ 0 }
+                        />
+                    } 
+            />
             <Route exact
                     path='/chat/:chatId/'
                     render={ obj => <Layout

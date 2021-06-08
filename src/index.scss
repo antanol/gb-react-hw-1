@@ -1,8 +1,5 @@
 @import 'components/Layout/Layout.scss';
-@import 'components/Layout/ChatList/ChatList.scss';
-@import 'components/Layout/Chat/Chat.scss';
-@import 'components/Layout/Message/Message.scss';
-
-body {
-  margin: 0;
-}
+@import 'components/ChatList/ChatList.scss';
+@import 'components/Chat/Chat.scss';
+@import 'components/Chat/Message/Message.scss';
+@import 'components/Profile/Profile.scss';

@@ -1,12 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { AppBar, Container, Toolbar, Typography} from '@material-ui/core';
+import { useSelector } from 'react-redux';
 
 function Profile(props){
     let { userId } = props;
-    if (!userId){
-        userId = 0;
-    }
+
+    const profile = useSelector(globalState => globalState.profile.users[userId]);
 
     return (
         <Container maxWidth='md' className='layout' style={{
@@ -17,7 +17,7 @@ function Profile(props){
             <AppBar position='static'>
                 <Toolbar>
                     <Link to = {`/`} >
-                        <Typography variant='h4'>
+                        <Typography variant='h6'>
                             Мои диалоги
                         </Typography>
                     </Link>
@@ -26,11 +26,18 @@ function Profile(props){
             
             <Container className='main'>
                 <div className='left-column'>
-                    <img src="http://placehold.it/200" />
+                    <img src="http://placehold.it/280x320" />
                 </div>
-                <Typography variant='h4'>
-                    Здесь будет имя пользователя с id = { userId }
-                </Typography>
+                <div className='info'>
+                    <Typography variant='h6'>
+                        { profile.name }
+                    </Typography>
+                    <Typography variant='body1'>
+                        Дата рождения: { profile.bday }
+                        <br />
+                        Город: { profile.city }
+                    </Typography>
+                </div>
             </Container>
         </Container>
     )

@@ -1,0 +1,18 @@
+.chat-list{
+    width: 300px;
+    background-color: white;
+
+    overflow: auto;
+
+    a{
+        text-decoration: none;
+    }
+
+    .MuiCard-root:hover{
+        background-color: darken($color: white, $amount: 10%);
+    }
+
+    button{
+        width: 100%;
+    }
+}
