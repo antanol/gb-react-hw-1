@@ -35,7 +35,7 @@ const initialState = {
     }
 };
 
-export const addReducer = (state = initialState, action) =>{
+export const messagesReducer = (state = initialState, action) =>{
     switch (action.type){
         case ADD_MESSAGE:
             return update(state, {
