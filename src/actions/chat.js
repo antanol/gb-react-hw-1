@@ -9,6 +9,13 @@ export const addMessage = ({chatId, newMessage}) => {
     }
 };
 
+export const addMessageThunk = ({chatId, newMessage}) => {
+    return (dispatch) => {
+        setTimeout(() => dispatch(addMessage({chatId, newMessage})), 
+        1000);
+    }
+};
+
 export const addChat = (newChat) => {
     return {
         type: ADD_CHAT,

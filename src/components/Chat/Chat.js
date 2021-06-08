@@ -4,7 +4,7 @@ import { Fab, Paper, TextField, Tooltip } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
 import Message from './Message/Message';
-import { addMessage } from '../../actions/chat';
+import { addMessage, addMessageThunk } from '../../actions/chat';
 
 function Chat(props){
     let { chatId } = props;
@@ -34,8 +34,8 @@ function Chat(props){
     
     // аналог componentDidUpdate
     React.useEffect( () => {
-        if (chats.length % 2 == 0){
-            dispatch(addMessage({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
+        if (chats.messages.length % 2 == 0){
+            dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
         };
 
     }, [chats]);
