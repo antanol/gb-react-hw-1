@@ -34,7 +34,7 @@ function Chat(props){
     
     // аналог componentDidUpdate
     React.useEffect( () => {
-        if (chats.messages.length % 2 == 0){
+        if (chats.messages.length % 2 == 1 && chats.messages.length > 0){
             dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
         };
 
