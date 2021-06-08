@@ -7,11 +7,11 @@ function Message(props){
     return (
         history.map((message, index) => 
             <div 
-              className={message.who=='Я'?'message me':'message'} 
+              className={message.who==='Я'?'message me':'message'} 
               key={index}
             >
                 <header>
-                    <span className='author'> {message.who=='Я'?'Вы':message.who} </span>
+                    <span className='author'> {message.who==='Я'?'Вы':message.who} </span>
                     <span className='time'> {message.time} </span>
                 </header>
                 { message.text }  
