@@ -11,4 +11,8 @@
     .MuiCard-root:hover{
         background-color: darken($color: white, $amount: 10%);
     }
+
+    button{
+        width: 100%;
+    }
 }

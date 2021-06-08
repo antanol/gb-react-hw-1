@@ -30,7 +30,7 @@ function Layout(props){
                     </Tooltip>
                     <Link to = {`/profile/${chats.userId}`} >
                         <Typography variant='h6'>
-                            { thisUser.name }
+                            {thisUser ? thisUser.name : 'Пользователь не найден'}
                         </Typography>
                     </Link>
                 </Toolbar>

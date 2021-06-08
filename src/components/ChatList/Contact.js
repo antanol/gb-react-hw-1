@@ -31,7 +31,7 @@ function Contact(props){
                         }
                         
                         title={
-                            users[chats[chatId].userId].name
+                            users[chats[chatId].userId]?.name ? users[chats[chatId].userId].name : 'Пользователь не найден'
                         }
 
                         subheader={

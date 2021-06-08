@@ -1,5 +1,5 @@
 import update from 'react-addons-update';
-import { ADD_MESSAGE } from '../actions/chat';
+import { ADD_MESSAGE, ADD_CHAT } from '../actions/chat';
 
 const initialState = {
     talks: {
@@ -46,6 +46,17 @@ export const addReducer = (state = initialState, action) =>{
                             messages: [...state.talks[action.chatId].messages,
                                         action.payload
                             ]
+                        }
+                    }
+                }
+            });
+        case ADD_CHAT:
+            return update(state, {
+                talks: {
+                    $merge:  {
+                        [Object.keys(state.talks).length]: {
+                            userId: 404,
+                            messages: [action.payload]
                         }
                     }
                 }
