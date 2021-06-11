@@ -10,7 +10,9 @@ const initialState = {
                     text: 'Захватить мир',
                     time: '6:16'
                 }
-            ]
+            ],
+            answerBot: false,
+            isBlinking: false
         },
         1: {
             userId: 123426,
@@ -25,11 +27,15 @@ const initialState = {
                     text: 'ок',
                     time: '23:16'
                 }
-            ]
+            ],
+            answerBot: true,
+            isBlinking: false
         },
         2: {
             userId: 123402,
-            messages:[]
+            messages:[],
+            answerBot: true,
+            isBlinking: false
         }
     }
 };
@@ -44,7 +50,9 @@ export const messagesReducer = (state = initialState, action) =>{
                             userId: state.talks[action.chatId].userId,
                             messages: [...state.talks[action.chatId].messages,
                                         action.payload
-                            ]
+                            ],
+                            answerBot: state.talks[action.chatId].answerBot,
+                            isBlinking: state.talks[action.chatId].isBlinking
                         }
                     }
                 };

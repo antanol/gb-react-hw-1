@@ -1,5 +1,6 @@
 import React from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import usePrevious from '../../utils/usePrevious';
 import { Fab, Paper, TextField, Tooltip } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
 
@@ -11,6 +12,7 @@ function Chat(props){
 
     const chats = useSelector( globalState => globalState.chats.talks[chatId] );
     const dispatch = useDispatch();
+    let prevMessages = usePrevious(chats.messages);
 
     let [inputValue, setInputValue] = React.useState('');
     let [showPlaceholder, setShowPlaceholder] = React.useState(false);
@@ -34,10 +36,13 @@ function Chat(props){
     
     // аналог componentDidUpdate
     React.useEffect( () => {
-        if (chats.messages.length % 2 == 1 && chats.messages.length > 0){
-            dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
-        };
+        // если в чате включен автоответчик (chats.answerBot), то сгенерировать ответ
+        // например, чат 0. Предположим, это чат с самим собой, там автоответчик не нужен
+        // а в большом приложении автоответчик бы включался, если бы пользователь был бы оффлайн
 
+        if (chats.answerBot && prevMessages && prevMessages.length < chats.messages.length && chats.messages[chats.messages.length - 1].who === 'Я'){
+            dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
+        }
     }, [chats]);
 
     const handleButtonClick = () => {
