@@ -7,6 +7,8 @@ import SendIcon from '@material-ui/icons/Send';
 import Message from './Message/Message';
 import { addMessage, addMessageThunk } from '../../actions/chat';
 
+import { SENDERS } from '../../constants';
+
 function Chat(props){
     let { chatId } = props;
 
@@ -40,14 +42,19 @@ function Chat(props){
         // например, чат 0. Предположим, это чат с самим собой, там автоответчик не нужен
         // а в большом приложении автоответчик бы включался, если бы пользователь был бы оффлайн
 
-        if (chats.answerBot && prevMessages && prevMessages.length < chats.messages.length && chats.messages[chats.messages.length - 1].who === 'Я'){
-            dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem({who: 'С вами говорит автоответчик',  text: 'На данный момент Ваш собеседник недоступен'})}));
+        if (chats.answerBot && prevMessages && prevMessages.length < chats.messages.length && chats.messages[chats.messages.length - 1].who === SENDERS.me){
+            dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem(
+                {
+                    who: chats.bot.title ? chats.bot.title : SENDERS.bot.title,  
+                    text: chats.bot.answer ? chats.bot.answer : SENDERS.bot.answer
+                }
+            )}));
         }
     }, [chats]);
 
     const handleButtonClick = () => {
         if (inputValue) {
-            dispatch(addMessage({chatId: chatId, newMessage: createMessageElem({who: 'Я', text:inputValue})}));
+            dispatch(addMessage({chatId: chatId, newMessage: createMessageElem({who: SENDERS.me, text:inputValue})}));
 
             setInputValue('');
         }

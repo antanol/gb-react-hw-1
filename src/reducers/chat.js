@@ -12,7 +12,9 @@ const initialState = {
                 }
             ],
             answerBot: false,
-            isBlinking: false
+            bot: {
+                isBlinking: false
+            }
         },
         1: {
             userId: 123426,
@@ -29,13 +31,19 @@ const initialState = {
                 }
             ],
             answerBot: true,
-            isBlinking: false
+            bot: {
+                isBlinking: true,
+                title: "Я ОФФЛАЙН"
+            }
         },
         2: {
             userId: 123402,
             messages:[],
             answerBot: true,
-            isBlinking: false
+            bot: {
+                isBlinking: false,
+                answer: "Привет. Как дела?"
+            }
         }
     }
 };
@@ -52,7 +60,7 @@ export const messagesReducer = (state = initialState, action) =>{
                                         action.payload
                             ],
                             answerBot: state.talks[action.chatId].answerBot,
-                            isBlinking: state.talks[action.chatId].isBlinking
+                            bot: state.talks[action.chatId].bot
                         }
                     }
                 };
