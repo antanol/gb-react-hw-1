@@ -17,7 +17,6 @@ function Chat(props){
     let prevMessages = usePrevious(chats.messages);
 
     let [inputValue, setInputValue] = React.useState('');
-    let [showPlaceholder, setShowPlaceholder] = React.useState(false);
 
     let createMessageElem = ({who, text}) => {
         return {
@@ -69,14 +68,6 @@ function Chat(props){
             handleButtonClick();
         }
     };
-
-    const handleButtonMouseOver = () => {
-        setShowPlaceholder(true);
-    };
-
-    const handleButtonMouseOut = () => {
-        setShowPlaceholder(false);
-    };
     
     return (
         <div className='chat-window'>
@@ -105,15 +96,10 @@ function Chat(props){
                 <Tooltip title='Отправить' aria-label='send'>
                     <Fab
                         onClick={handleButtonClick}
-                        onMouseOver={handleButtonMouseOver}
-                        onMouseOut={handleButtonMouseOut}
                     >
                         <SendIcon />
                     </Fab>
                 </Tooltip>
-                <div className={showPlaceholder?'placeholder placeholder_show':'placeholder'}>
-                    Вы также можете нажимать ctrl+Enter, чтобы отправить сообщение
-                </div>
             </footer>
         </div>
     )
