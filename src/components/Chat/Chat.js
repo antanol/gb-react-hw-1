@@ -45,7 +45,7 @@ function Chat(props){
         if (chats.answerBot && prevMessages && prevMessages.length < chats.messages.length && chats.messages[chats.messages.length - 1].who === SENDERS.me){
             dispatch(addMessageThunk({chatId: chatId, newMessage: createMessageElem(
                 {
-                    who: chats.bot.title ? chats.bot.title : SENDERS.bot.title,  
+                    who: SENDERS.bot.inBase,  
                     text: chats.bot.answer ? chats.bot.answer : SENDERS.bot.answer
                 }
             )}));
@@ -86,7 +86,10 @@ function Chat(props){
                             backgroundColor: '#cfe8fc', 
                             flexGrow: 1
             }}>
-                <Message history={chats.messages}/>
+                <Message 
+                    history = { chats.messages }
+                    botSettings = { chats.bot }
+                />
             </Paper>
             
             <footer style={ {  display: 'flex' } }>
