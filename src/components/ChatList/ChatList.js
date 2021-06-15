@@ -2,7 +2,7 @@ import React from 'react';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Button } from '@material-ui/core';
 
-import Contact from './Contact'
+import Contact from './Contact/Contact'
 import { addChat } from '../../actions/chat';
 
 function ChatList(){

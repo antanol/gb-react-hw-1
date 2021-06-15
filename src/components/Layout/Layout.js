@@ -13,7 +13,7 @@ function Layout(props){
     const chats = useSelector( globalState => globalState.chats.talks[chatId] );
     const users = useSelector( globalState => globalState.profile.users );
 
-    let thisUser = users[chats.userId];
+    const thisUser = users[chats.userId];
 
     return (
         <Container maxWidth='md' className='layout' style={{

@@ -1,5 +1,4 @@
-import update from 'react-addons-update';
-import { ADD_MESSAGE, ADD_CHAT } from '../actions/chat';
+import { ADD_MESSAGE, ADD_CHAT, UNREAD_CHAT } from '../actions/chat';
 
 const initialState = {
     talks: {
@@ -11,7 +10,12 @@ const initialState = {
                     text: 'Захватить мир',
                     time: '6:16'
                 }
-            ]
+            ],
+            answerBot: false,
+            bot: {
+                isBlinking: false
+            },
+            unread: false
         },
         1: {
             userId: 123426,
@@ -26,41 +30,63 @@ const initialState = {
                     text: 'ок',
                     time: '23:16'
                 }
-            ]
+            ],
+            answerBot: true,
+            bot: {
+                isBlinking: true,
+                title: "Я ОФФЛАЙН"
+            },
+            unread: false
         },
         2: {
             userId: 123402,
-            messages:[]
+            messages:[],
+            answerBot: true,
+            bot: {
+                isBlinking: false,
+                answer: "Привет. Как дела?"
+            },
+            unread: false
         }
     }
 };
 
-export const addReducer = (state = initialState, action) =>{
+export const messagesReducer = (state = initialState, action) =>{
     switch (action.type){
         case ADD_MESSAGE:
-            return update(state, {
-                talks: {
-                    $merge:  {
+            return {
+                    talks: {
+                        ...state.talks,
                         [action.chatId]: {
                             userId: state.talks[action.chatId].userId,
                             messages: [...state.talks[action.chatId].messages,
                                         action.payload
-                            ]
+                            ],
+                            answerBot: state.talks[action.chatId].answerBot,
+                            bot: state.talks[action.chatId].bot
                         }
                     }
-                }
-            });
+                };
         case ADD_CHAT:
-            return update(state, {
+            return {
                 talks: {
-                    $merge:  {
-                        [Object.keys(state.talks).length]: {
-                            userId: 404,
-                            messages: [action.payload]
-                        }
+                    ...state.talks,
+                    [Object.keys(state.talks).length]: {
+                        userId: 404,
+                        messages: [action.payload]
                     }
                 }
-            });
+            };
+        case UNREAD_CHAT:
+            return {
+                talks: {
+                    ...state.talks,
+                    [action.chatId]: {
+                        ...state.talks[action.chatId],
+                        unread: action.payload.isBlinking
+                    }
+                }
+            }
         default:
             return state;
     }
