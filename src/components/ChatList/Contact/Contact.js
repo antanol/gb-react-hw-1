@@ -12,6 +12,9 @@ const useStyles = makeStyles({
     message: {
         padding: '0',
         paddingLeft: '60px'
+    },
+    unreadChat:{
+        backgroundColor: 'rgb(210, 225, 245)'
     }
 });
 
@@ -24,7 +27,9 @@ function Contact(props){
     return (
         Object.keys(chats).map((chatId, index)=>
             <Link to = {`/chat/${chatId}`} key={index} >
-                <Card>
+                <Card 
+                    className = { chats[chatId].unread ? classes.unreadChat : '' }
+                >
                     <CardHeader
                         avatar={         
                             <Skeleton variant="circle" width={40} height={40} />

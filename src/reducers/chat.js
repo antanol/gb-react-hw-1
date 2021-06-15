@@ -1,4 +1,4 @@
-import { ADD_MESSAGE, ADD_CHAT } from '../actions/chat';
+import { ADD_MESSAGE, ADD_CHAT, UNREAD_CHAT } from '../actions/chat';
 
 const initialState = {
     talks: {
@@ -14,7 +14,8 @@ const initialState = {
             answerBot: false,
             bot: {
                 isBlinking: false
-            }
+            },
+            unread: false
         },
         1: {
             userId: 123426,
@@ -34,7 +35,8 @@ const initialState = {
             bot: {
                 isBlinking: true,
                 title: "Я ОФФЛАЙН"
-            }
+            },
+            unread: false
         },
         2: {
             userId: 123402,
@@ -43,7 +45,8 @@ const initialState = {
             bot: {
                 isBlinking: false,
                 answer: "Привет. Как дела?"
-            }
+            },
+            unread: false
         }
     }
 };
@@ -74,6 +77,16 @@ export const messagesReducer = (state = initialState, action) =>{
                     }
                 }
             };
+        case UNREAD_CHAT:
+            return {
+                talks: {
+                    ...state.talks,
+                    [action.chatId]: {
+                        ...state.talks[action.chatId],
+                        unread: action.payload.isBlinking
+                    }
+                }
+            }
         default:
             return state;
     }
